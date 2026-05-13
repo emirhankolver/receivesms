@@ -24,6 +24,55 @@
             }
         }
     </script>
+    <style>
+        /* Phone pulse glow animation */
+        @keyframes phone-pulse {
+            0%, 100% { box-shadow: 0 25px 50px -12px rgba(0, 122, 255, 0.25); }
+            50% { box-shadow: 0 25px 50px -12px rgba(0, 122, 255, 0.5), 0 0 30px rgba(0, 122, 255, 0.15); }
+        }
+        .animate-phone-pulse {
+            animation: phone-pulse 3s ease-in-out infinite;
+        }
+
+        /* Signal bar animation */
+        @keyframes signal-bar {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+        .animate-signal-bar {
+            animation: signal-bar 1.5s ease-in-out infinite;
+        }
+
+        /* SMS message slide-in */
+        @keyframes sms-slide-in {
+            0% { opacity: 0; transform: translateX(-20px) scale(0.95); }
+            100% { opacity: 1; transform: translateX(0) scale(1); }
+        }
+        .animate-sms-in {
+            animation: sms-slide-in 0.4s ease-out forwards;
+        }
+
+        /* SMS message fade-out */
+        @keyframes sms-fade-out {
+            0% { opacity: 1; transform: translateX(0); }
+            100% { opacity: 0; transform: translateX(20px); }
+        }
+        .animate-sms-out {
+            animation: sms-fade-out 0.3s ease-in forwards;
+        }
+
+        /* Scrollbar styling for messages container */
+        #smsContainer::-webkit-scrollbar {
+            width: 3px;
+        }
+        #smsContainer::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        #smsContainer::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body class="bg-white text-gray-900 font-sans antialiased">
 
@@ -57,7 +106,7 @@
 </nav>
 
 <!-- ===== HERO ===== -->
-<section class="bg-gradient-to-br from-blue-50 to-white py-20 md:py-28">
+<section class="bg-gradient-to-br from-blue-50 to-white py-20 md:py-28 overflow-hidden">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
         <div class="flex-1 text-center md:text-left">
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight">
@@ -80,13 +129,43 @@
             </div>
         </div>
         <div class="flex-1 flex justify-center">
-            <div class="relative w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-primary to-blue-300 rounded-3xl shadow-2xl flex items-center justify-center">
-                <div class="text-center text-white">
-                    <img src="assets/logo.svg" alt="ReceiveSMS" class="w-20 h-20 mx-auto mb-4 rounded-xl" />
-                    <p class="text-lg font-semibold">Virtual Number</p>
-                    <p class="text-sm opacity-80">+1 (555) 123-4567</p>
-                    <div class="mt-4 bg-white/20 rounded-lg px-4 py-2 text-sm">
-                        <i class="fas fa-envelope mr-2"></i> SMS Received
+            <!-- Phone Mockup -->
+            <div class="relative w-72 h-[28rem] md:w-80 md:h-[30rem] bg-gradient-to-br from-primary to-blue-400 rounded-[2.5rem] shadow-2xl flex flex-col items-center p-4 animate-phone-pulse">
+                <!-- Signal bars -->
+                <div class="flex items-center gap-1 absolute top-5 left-6">
+                    <div class="w-[3px] h-2 bg-white/60 rounded-full animate-signal-bar" style="animation-delay: 0s;"></div>
+                    <div class="w-[3px] h-3 bg-white/60 rounded-full animate-signal-bar" style="animation-delay: 0.15s;"></div>
+                    <div class="w-[3px] h-4 bg-white/60 rounded-full animate-signal-bar" style="animation-delay: 0.3s;"></div>
+                    <div class="w-[3px] h-5 bg-white/70 rounded-full animate-signal-bar" style="animation-delay: 0.45s;"></div>
+                </div>
+                <!-- Battery icon -->
+                <div class="absolute top-5 right-6 text-white/60 text-xs">
+                    <i class="fas fa-battery-three-quarters"></i>
+                </div>
+                <!-- Notch -->
+                <div class="w-24 h-5 bg-black/20 rounded-full mx-auto mt-1"></div>
+                <!-- Header -->
+                <div class="text-center text-white mt-3">
+                    <img src="assets/logo.svg" alt="ReceiveSMS" class="w-10 h-10 mx-auto mb-1 rounded-lg" />
+                    <p class="text-sm font-semibold">Virtual Number</p>
+                    <p class="text-xs opacity-80">+1 (555) 123-4567</p>
+                </div>
+                <!-- Divider -->
+                <div class="w-full border-t border-white/20 my-3"></div>
+                <!-- Messages Container -->
+                <div class="flex-1 w-full overflow-hidden relative flex flex-col px-1">
+                    <!-- SMS messages will be injected here by JS -->
+                    <div id="smsContainer" class="space-y-2 flex-1"></div>
+                    <!-- Typing indicator (at the bottom) -->
+                    <div id="typingIndicator" class="flex items-center gap-2 mt-1 opacity-0 transition-opacity duration-300">
+                        <div class="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-[10px] text-white/70 font-bold">G</div>
+                        <div class="bg-white/30 backdrop-blur-sm rounded-2xl rounded-bl-md px-3 py-2">
+                            <div class="flex gap-1">
+                                <div class="w-2 h-2 bg-white/60 rounded-full animate-bounce" style="animation-delay: 0s;"></div>
+                                <div class="w-2 h-2 bg-white/60 rounded-full animate-bounce" style="animation-delay: 0.15s;"></div>
+                                <div class="w-2 h-2 bg-white/60 rounded-full animate-bounce" style="animation-delay: 0.3s;"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -277,6 +356,165 @@
             }
         });
     });
+
+    // ===== SMS ANIMATION LOOP =====
+    (function() {
+        const container = document.getElementById('smsContainer');
+        const typingIndicator = document.getElementById('typingIndicator');
+
+        // Fun fictional SMS messages (no real platform names to avoid copyright issues)
+        const messages = [
+            {
+                sender: 'Catbook',
+                initial: 'C',
+                color: '#FF6B6B',
+                text: 'Your Catbook verification code is <strong>48291</strong>. Meow! 🐱'
+            },
+            {
+                sender: 'PizzaDash',
+                initial: 'P',
+                color: '#FFA94D',
+                text: 'Your PizzaDash code is <strong>7392</strong>. Extra cheese incoming! 🍕'
+            },
+            {
+                sender: 'SnapDuck',
+                initial: 'S',
+                color: '#51CF66',
+                text: 'Your SnapDuck code: <strong>615-384</strong>. Quack quack! 🦆'
+            },
+            {
+                sender: 'BirdChat',
+                initial: 'B',
+                color: '#339AF0',
+                text: 'Your BirdChat login code: <strong>28473</strong>. Tweet responsibly! 🐦'
+            },
+            {
+                sender: 'FakeBay',
+                initial: 'F',
+                color: '#F06595',
+                text: 'Your FakeBay OTP is <strong>93716</strong>. Sold! To the highest bidder! 🛒'
+            }
+        ];
+
+        let currentIndex = 0;
+        let messageElements = [];
+        let isAnimating = false;
+
+        // Create a message bubble element
+        function createMessage(msg) {
+            const div = document.createElement('div');
+            div.className = 'flex items-start gap-2 mb-3 opacity-0';
+            div.innerHTML = `
+                <div class="w-6 h-6 rounded-full flex items-center justify-center text-[10px] text-white font-bold shrink-0 mt-0.5" style="background-color: ${msg.color}">${msg.initial}</div>
+                <div class="bg-white/90 backdrop-blur-sm rounded-2xl rounded-tl-md px-3 py-2 max-w-[85%] shadow-sm">
+                    <span class="text-xs font-bold" style="color: ${msg.color}">${msg.sender}</span>
+                    <p class="text-xs text-gray-700 mt-0.5 leading-relaxed">${msg.text}</p>
+                </div>
+            `;
+            return div;
+        }
+
+        // Show typing indicator for a specific sender
+        function showTyping(senderInitial, senderColor) {
+            typingIndicator.querySelector('.rounded-full').textContent = senderInitial;
+            typingIndicator.querySelector('.rounded-full').style.backgroundColor = senderColor;
+            typingIndicator.classList.remove('opacity-0');
+            typingIndicator.classList.add('opacity-100');
+        }
+
+        // Hide typing indicator
+        function hideTyping() {
+            typingIndicator.classList.remove('opacity-100');
+            typingIndicator.classList.add('opacity-0');
+        }
+
+        // Scroll messages container to bottom without affecting page scroll
+        function scrollContainerToBottom() {
+            const parent = container.parentElement;
+            if (parent) {
+                parent.scrollTop = parent.scrollHeight;
+            }
+        }
+
+        // Animate next message in sequence
+        function showNextMessage() {
+            if (isAnimating) return;
+            isAnimating = true;
+
+            const msg = messages[currentIndex];
+
+            // Show typing indicator
+            showTyping(msg.initial, msg.color);
+
+            // After typing delay, show the message
+            setTimeout(() => {
+                hideTyping();
+
+                const el = createMessage(msg);
+                container.appendChild(el);
+
+                // Trigger slide-in animation
+                requestAnimationFrame(() => {
+                    el.classList.remove('opacity-0');
+                    el.classList.add('animate-sms-in');
+                });
+
+                messageElements.push(el);
+
+                // Scroll container only (not the whole page)
+                scrollContainerToBottom();
+
+                currentIndex++;
+
+                // If we've shown all messages, wait then restart
+                if (currentIndex >= messages.length) {
+                    setTimeout(() => {
+                        clearMessages();
+                    }, 4000);
+                } else {
+                    isAnimating = false;
+                    // Schedule next message
+                    setTimeout(showNextMessage, 2000);
+                }
+            }, 1500);
+        }
+
+        // Clear all messages with fade-out animation
+        function clearMessages() {
+            if (messageElements.length === 0) {
+                resetLoop();
+                return;
+            }
+
+            // Fade out all messages
+            messageElements.forEach((el, i) => {
+                setTimeout(() => {
+                    el.classList.remove('animate-sms-in');
+                    el.classList.add('animate-sms-out');
+                    setTimeout(() => {
+                        if (el.parentNode) el.parentNode.removeChild(el);
+                    }, 300);
+                }, i * 200);
+            });
+
+            // Reset after all messages are gone
+            setTimeout(() => {
+                messageElements = [];
+                resetLoop();
+            }, messageElements.length * 200 + 400);
+        }
+
+        // Reset and restart the loop
+        function resetLoop() {
+            currentIndex = 0;
+            isAnimating = false;
+            // Small pause before restarting
+            setTimeout(showNextMessage, 1500);
+        }
+
+        // Start the animation loop
+        showNextMessage();
+    })();
 </script>
 
 </body>
