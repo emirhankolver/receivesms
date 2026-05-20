@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png" />
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
     <meta property="og:title" content="Support - ReceiveSMS" />
-    <meta property="og:description" content="Get support for ReceiveSMS - Virtual Number SMS service." />
+    <meta property="og:description" content="Get support for ReceiveSMS - SMS verification request service." />
     <meta property="og:image" content="assets/og-image.png" />
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary_large_image" />
@@ -73,9 +73,8 @@
         </div>
         <p class="text-gray-600 leading-relaxed">
             SMS validation is the process of verifying your identity by receiving a text message with a verification code.
-            With ReceiveSMS, you can use virtual phone numbers to receive these codes without exposing your personal phone number.
-            Simply purchase a virtual number from your preferred country, use it for the verification you need,
-            and the SMS will appear instantly in your dashboard.
+            With ReceiveSMS, you can submit a verification request using a virtual phone number, so you never have to expose your personal number.
+            Simply start a verification request for your preferred country, and the SMS code will appear instantly in your dashboard once received.
         </p>
     </div>
 </section>
@@ -172,21 +171,21 @@
 
     // FAQ data
     const faqs = [
-        { q: 'What is ReceiveSMS?', a: 'ReceiveSMS is a service that provides temporary virtual phone numbers for receiving SMS messages online. It is commonly used for account verification, privacy protection, and testing purposes.' },
-        { q: 'How does SMS validation work?', a: 'When you purchase a virtual number, you can use it to receive SMS messages just like a real phone number. Our system captures incoming messages and displays them in your dashboard in real-time, allowing you to complete verifications instantly.' },
-        { q: 'How do I get a virtual number?', a: 'Simply browse the available numbers on the Services tab, select the one that suits your needs, and complete the purchase. The number will be instantly assigned to your account and ready to use.' },
-        { q: 'Do I need an account to use the service?', a: 'No, you can use the service without an account. However, creating an account ensures your coin balance is saved to your account and won\'t be lost if you reinstall the app.' },
-        { q: 'Why didn\'t I receive my SMS?', a: 'There could be several reasons: the sender may be experiencing delays, the number might not be supported for that specific service in the selected country, or there could be network issues. Try selecting a different country for verification and attempt again. If the issue persists, please contact our support team.' },
-        { q: 'How long are the numbers valid?', a: 'The validity period depends on the plan you choose. Temporary numbers are typically valid for 1 hour, while premium numbers can last up to 24 hours or longer. Check the product details before purchasing.' },
-        { q: 'Can I reuse a number?', a: 'No, unfortunately the number will expire within a few minutes or immediately after an SMS is received. You will need to purchase a new number for each verification.' },
-        { q: 'Are there any limits on how many messages I can receive?', a: 'Yes, each ordered phone number can receive a single message.' },
+        { q: 'What is ReceiveSMS?', a: 'ReceiveSMS is a service that allows you to submit SMS verification requests using virtual phone numbers. It is commonly used for account verification, privacy protection, and testing purposes.' },
+        { q: 'How does SMS validation work?', a: 'When you start a verification request, our system provides a virtual phone number for you to use. Incoming SMS messages for your request are captured and displayed in your dashboard in real-time, allowing you to complete verifications instantly.' },
+        { q: 'How do I start a verification request?', a: 'Browse the available countries on the Services tab, select your preferred region, and start a verification request. A virtual phone number will be provided for your request and you can use it to receive your verification code.' },
+        { q: 'Do I need an account to use the service?', a: 'No, you can use the service without an account. However, creating an account ensures your coin balance is saved and won\'t be lost if you reinstall the app.' },
+        { q: 'Why didn\'t I receive my SMS?', a: 'There could be several reasons: the sender may be experiencing delays, the verification request might not be supported for that specific service in the selected country, or there could be network issues. Try selecting a different country for verification and attempt again. If the issue persists, please contact our support team.' },
+        { q: 'How are verification requests processed?', a: 'Each verification request is processed individually. Once your request is completed, you will see the received SMS in your dashboard. If the request cannot be completed, your credits will be returned automatically.' },
+        { q: 'Can I reuse a verification request?', a: 'No, each verification request is for a single use only. You will need to start a new verification request for each verification you wish to complete.' },
+        { q: 'Are there any limits on how many messages I can receive?', a: 'Yes, each verification request can receive a single message.' },
         { q: 'How do I earn or purchase credits?', a: 'You need to purchase coins to use the service. Coins can be bought through the in-app purchase options available in the app.' },
-        { q: 'What is your refund policy?', a: 'Ordered phone numbers expire in a few minutes. Simply wait until the number expires, then tap the refund button and your cost will be refunded to your balance automatically.' },
-        { q: 'Can I get a refund if the service didn\'t work?', a: 'Yes. After the service expires, you can refund the cost of the order directly to your balance.' },
+        { q: 'What is your refund policy?', a: 'If your verification request cannot be completed, your credits will be returned to your balance automatically.' },
+        { q: 'Can I get a refund if the service didn\'t work?', a: 'Yes. If your verification request fails, your credits will be returned to your balance.' },
         { q: 'Which countries are supported?', a: 'We support a wide range of countries including the US, UK, Canada, Germany, France, Australia, and many more. The available countries are displayed on the Services page. We are constantly adding new regions.' },
         { q: 'How do I delete my account?', a: 'You can delete your account from the Profile page. Once requested, your account will be removed within 6 months and your account balance will become inaccessible.' },
         { q: 'How do I contact support?', a: 'You can reach us via email at support@turnaworks.com. Our team typically responds within 24 hours. For urgent issues, please include "URGENT" in the subject line.' },
-        { q: 'Can I use the service on multiple devices?', a: 'Yes! Your account is synced across all your devices. Simply log in with the same account on any device to access your numbers and messages.' }
+        { q: 'Can I use the service on multiple devices?', a: 'Yes! Your account is synced across all your devices. Simply log in with the same account on any device to access your verification requests and messages.' }
     ];
 
     const container = document.getElementById('faqContainer');
